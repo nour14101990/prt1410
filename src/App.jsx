@@ -4,6 +4,8 @@ import { AnimatePresence } from 'framer-motion';
 import WelcomeScreen from './components/WelcomeScreen';
 import Home from './components/HomePage';
 
+import AnimatedBackground from "./components/AnimatedBackground";
+import Navbar from "./components/Navbar";
 const LandingPage = ({ showWelcome, setShowWelcome }) => {
   return (
     <>
@@ -15,6 +17,8 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
 
       {!showWelcome && (
         <>
+        <Navbar/>
+        <AnimatedBackground />
           <main className="relative z-10">
             <Home />
           </main>
@@ -37,3 +41,19 @@ function App() {
 }
 
 export default App;
+{/*import React from 'react';
+import TriangulatedNetwork from './components/TriangulatedNetwork';
+import CursorPointer from "./components/CursorPointer";
+
+function App() {
+  return (
+    <div>
+     <CursorPointer dotSize={16} offsetY={16} color="rgba(59,130,246,0.95)" followSpeed={0.18}>
+            <TriangulatedNetwork />
+
+    </CursorPointer>
+    </div>
+  );
+}
+
+export default App;*/}
