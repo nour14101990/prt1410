@@ -3,9 +3,14 @@ import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import WelcomeScreen from './components/WelcomeScreen';
 import Home from './components/HomePage';
-
+import About from './components/About';
 import AnimatedBackground from "./components/AnimatedBackground";
 import Navbar from "./components/Navbar";
+import Portfolio from "./components/Portofolio";
+import ProjectDetails from "./components/ProjectDetail";
+import Footer from "./components/Footer";
+import ContactPage from "./components/Contact";
+
 const LandingPage = ({ showWelcome, setShowWelcome }) => {
   return (
     <>
@@ -21,13 +26,23 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
         <AnimatedBackground />
           <main className="relative z-10">
             <Home />
+            <About />
+            <Portfolio />
+            <ContactPage />
           </main>
+          <Footer />
         </>
       )}
     </>
   );
 };
+const ProjectPageLayout = () => (
+  <>
+    <ProjectDetails />
+    <Footer />
 
+  </>
+);
 function App() {
   const [showWelcome, setShowWelcome] = useState(true);
 
@@ -35,25 +50,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage showWelcome={showWelcome} setShowWelcome={setShowWelcome} />} />
+        <Route path="/project/:id" element={<ProjectPageLayout />} />
+           
+      
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-{/*import React from 'react';
-import TriangulatedNetwork from './components/TriangulatedNetwork';
-import CursorPointer from "./components/CursorPointer";
-
-function App() {
-  return (
-    <div>
-     <CursorPointer dotSize={16} offsetY={16} color="rgba(59,130,246,0.95)" followSpeed={0.18}>
-            <TriangulatedNetwork />
-
-    </CursorPointer>
-    </div>
-  );
-}
-
-export default App;*/}

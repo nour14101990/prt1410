@@ -45,7 +45,7 @@ const TriangulatedNetwork = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
         ctx.fill();
       }
 
@@ -109,7 +109,7 @@ const TriangulatedNetwork = () => {
             ctx.beginPath();
             ctx.moveTo(points[i].x, points[i].y);
             ctx.lineTo(points[j].x, points[j].y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - dist / MAX_DISTANCE})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.6 - (dist / MAX_DISTANCE) * 0.6})`;
             ctx.stroke();
           }
         }
