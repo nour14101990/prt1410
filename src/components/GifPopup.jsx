@@ -1,24 +1,13 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 
-/**
- * GifPopup - Enhanced modal component for displaying and downloading GIFs
- * 
- * Key improvements:
- * - Better TypeScript support with PropTypes
- * - Improved accessibility with ARIA labels and keyboard navigation
- * - Enhanced visual design with modern styling
- * - Performance optimizations with memoization and lazy loading
- * - Better separation of concerns with sub-components
- * - Responsive design improvements
- */
 const GifPopup = ({
   gifs = [],
   gifSrc = null,
   usePreviewStyle = false,
   previewWrapperClass = "space-y-6 md:space-y-10 animate-slideInRight",
-  previewCardClass = "relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group",
-  previewImgClass = "w-full object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105",
+  previewCardClass = "relative cursor-pointer overflow-hidden border border-white/10 shadow-2xl group",
+  previewImgClass = "w-full object-cover  transform transition-transform duration-700 will-change-transform group-hover:scale-105",
   thumbnailHeight = 160,
   columns = 4,
   modalMaxWidth = "min(900px, 92vw)",
@@ -216,7 +205,7 @@ const PreviewThumbnail = React.memo(({
       aria-label={`Open ${gif.title || `GIF ${index + 1}`}`}
       type="button"
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 " />
       
       <img
         src={gif.thumbnail || gif.url}
@@ -243,7 +232,7 @@ const GridThumbnail = React.memo(({
 }) => (
   <button
     onClick={() => onOpen(index)}
-    className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform hover:scale-[1.02]"
+    className="relative rounded-2xl  overflow-hidden border border-white/10 shadow-2xl group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform hover:scale-[1.02]"
     aria-label={`Open ${gif.title || `GIF ${index + 1}`}`}
     type="button"
   >

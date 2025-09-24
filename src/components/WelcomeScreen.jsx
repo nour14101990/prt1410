@@ -141,7 +141,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
       variants={childVariants} data-aos="fade-up" data-aos-delay="1200"
       className="text-xl md:text-3xl text-slate-200 max-w-2xl mx-auto font-light leading-relaxed"
     >
-      Explore my journey as a Desktop Application Engineer, showcasing innovative software solutions and technical expertise.
+      Explore my journey as a Desktop Application Developer, showcasing innovative software solutions and technical expertise.
     </motion.p>
   </div>
 

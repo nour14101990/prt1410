@@ -58,8 +58,8 @@ const WORDS = ["Desktop Application Developer", "Software Innovator", "Cross-Pla
 const TECH_STACK = ["ASP.NET Core", "C#", "WPF", "AvaloniaUI", "REST APIs"];
 const SOCIAL_LINKS = [
   { icon: Github, link: "https://github.com/znono7" },
-  { icon: Linkedin, link: "https://www.linkedin.com" },
-  { icon: Instagram, link: "https://www.instagram.com" }
+  { icon: Linkedin, link: "https://www.linkedin.com/in/zakhrouf-noureddine" },
+  { icon: Instagram, link: "https://www.instagram.com/no.ureddine7828/" }
 ];
 
 const Home = () => {
@@ -165,7 +165,7 @@ const Home = () => {
 
                   <motion.div variants={item} className="flex flex-row justify-center gap-4 mt-8">
                     <CTAButton 
-                      href="#portfolio" 
+                      href="#Portfolio" 
                       text="Explore Projects" 
                       icon={ExternalLink} 
                     />
