@@ -179,7 +179,8 @@ const AboutPage = () => {
 
             {/* Buttons with updated theme */}
             <div className="flex flex-col lg:flex-row items-center gap-4 w-full justify-center">
-              <a href="https://1drv.ms/b/c/d3d21e180cddc5fb/EaDDYcBk3EpIi17LqV5hfwQBWq0tKya7xs3OemedlTO1tA?e=PBI7QL" className="w-full lg:w-auto">
+              <a href="https://drive.google.com/file/d/15nbive3dp6y0-xu23Z_z3nYNuQT4EbNS/view?usp=sharing" 
+              className="w-full lg:w-auto" target="_blank" rel="noopener noreferrer">
                 <motion.button
                   className="w-full lg:w-auto sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-slate-200 font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                   whileHover={{ scale: 1.05 }}
