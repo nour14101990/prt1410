@@ -1,65 +1,65 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Share2, User, Mail, MessageSquare, Send, Sparkles } from "lucide-react";
 import SocialLinks from "./SocialLinks";
 import Swal from "sweetalert2";
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
+
+// Replace these with environment variables or your actual EmailJS IDs
+// For Create React App: set REACT_APP_EMAILJS_SERVICE_ID, REACT_APP_EMAILJS_TEMPLATE_ID, REACT_APP_EMAILJS_PUBLIC_KEY
+// For Vite: set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY
+const SERVICE_ID = "service_hkcuicw";
+const TEMPLATE_ID = "template_zn1pken";
+const PUBLIC_KEY = "hlLBUSvoqSEsFWd22";
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const form = useRef(null);
+  const [formData, setFormData] = useState({name: "",
+  email: "",
+  message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  const handleSubmit = (e) => {
+const templateData = useState({name: formData.name,
+  email: formData.email,
+  message: formData.message,title:"From Portfolio" });
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
     Swal.fire({
-      title: 'Sending Message...',
+      title: 'Sending Message... ',
       html: 'Please wait while we send your message',
       allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
+      didOpen: () => Swal.showLoading(),
       background: '#0f172a',
       color: '#ffffff',
       confirmButtonColor: '#818cf8',
     });
 
     try {
-      const form = e.target;
+      // sendForm will read form input names and map them to your EmailJS template parameters
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY);
 
-      // Submit the native form (keeps existing behaviour with formsubmit.co)
-      // calling submit() is synchronous and may navigate away — leaving as-is
-      form.submit();
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your message has been sent successfully!',
+        icon: 'success',
+        confirmButtonColor: '#818cf8',
+        timer: 2000,
+        timerProgressBar: true,
+        background: '#0f172a',
+        color: '#ffffff'
+      });
 
-      // If the page doesn't navigate (e.g. when used as an AJAX endpoint), show success
-      setTimeout(() => {
-        Swal.fire({
-          title: 'Success!',
-          text: 'Your message has been sent successfully!',
-          icon: 'success',
-          confirmButtonColor: '#818cf8',
-          timer: 2000,
-          timerProgressBar: true,
-          background: '#0f172a',
-          color: '#ffffff'
-        });
-
-        setFormData({ name: "", email: "", message: "" });
-        setIsSubmitting(false);
-      }, 700);
+      setFormData({ name: "", email: "", message: "" });
+      if (form.current) form.current.reset();
     } catch (error) {
+      console.error('EmailJS error:', error);
       Swal.fire({
         title: 'Error!',
         text: 'Something went wrong. Please try again later.',
@@ -68,6 +68,7 @@ const ContactPage = () => {
         background: '#0f172a',
         color: '#ffffff'
       });
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -119,7 +120,6 @@ const ContactPage = () => {
         viewport={{ once: false }}
         variants={sectionVariants}
       >
-        {/* Single column layout — right column (animation) removed */}
         <div className="w-full max-w-2xl">
           <motion.div
             variants={childVariants}
@@ -135,15 +135,8 @@ const ContactPage = () => {
               <Share2 className="w-10 h-10 text-purple-500 opacity-50" aria-hidden />
             </div>
 
-            <form
-              action="https://formsubmit.co/n.zakhrouf.inf@lagh-univ.dz"
-              method="POST"
-              onSubmit={handleSubmit}
-              className="space-y-6"
-              aria-busy={isSubmitting}
-            >
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_captcha" value="false" />
+            <form ref={form} onSubmit={handleSubmit} className="space-y-6" aria-busy={isSubmitting}>
+              {/* EmailJS uses the input "name" attributes to populate template fields. Make sure your EmailJS template uses these exact names (user_name, user_email, message) or update accordingly. */}
 
               <motion.div variants={childVariants} className="relative group">
                 <User className="absolute left-4 top-4 w-5 h-5 text-slate-400 group-focus-within:text-purple-400 transition-colors" />
